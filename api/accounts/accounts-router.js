@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const Account = require("./accounts-model")
 
+const { checkAccountId } = require("./accounts-middleware")
+
 router.get('/', (req, res, next) => {
   // DO YOUR MAGIC
   Account.getAll()
@@ -12,9 +14,9 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id',checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
-  const id = req.params.id
+  const id = req.id
   Account.getById(id)
   .then(account => {
     res.status(200).json(account)
@@ -36,9 +38,9 @@ router.post('/', (req, res, next) => {
   })
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
-  const id = req.params.id
+  const id = req.id
   const updatedAcc = req.body
   Account.updateById(id, updatedAcc)
   .then(account => {
