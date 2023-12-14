@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
   })
 })
 
-router.put('/:id', checkAccountId, (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   // DO YOUR MAGIC
   const id = req.id
   const updatedAcc = req.body
