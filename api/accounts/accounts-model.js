@@ -20,7 +20,9 @@ const db = require("../../data/db-config")
 
  const updateById = async (id, account) => {
   // DO YOUR MAGIC
-  const result = await db("accounts").where("id", id).update({"name": account.name, "budget": account.budget})
+  console.log("this is the acocunt stuff", account.name, account.budget)
+  await db("accounts").where("id", id).update({"name": account.name, "budget": account.budget})
+  const result = getById(id)
   return result
 }
 
