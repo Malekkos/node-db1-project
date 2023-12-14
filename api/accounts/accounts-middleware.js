@@ -29,7 +29,6 @@ exports.checkAccountNameUnique = async (req, res, next) => {
   // DO YOUR MAGIC
   const name = req.body.name
   const doesExist = await db("accounts").where("name", name.trim()).first()
-  console.log("the stuff", doesExist)
   if(doesExist) {
     next({ status: 400, message: "that name is taken"})
   }
