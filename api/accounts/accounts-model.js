@@ -26,6 +26,8 @@ const db = require("../../data/db-config")
 
  const deleteById = async id => {
   // DO YOUR MAGIC
+  const result = await db("accounts").where("id", id).delete()
+  return result
 }
 
 module.exports = {
