@@ -7,7 +7,7 @@ exports.checkAccountPayload = (req, res, next) => {
   const error = {status: 400 }
   const name = req.body.name
   const budget = req.body.budget
-  if(!name || !budget) {
+  if(name === undefined || budget === undefined) {
     error.message = "name and budget are required"
     next(error);
   } else if(name.trim().length < 3 || name.trim().length > 100){
