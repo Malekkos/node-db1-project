@@ -26,7 +26,7 @@ router.get('/:id', checkAccountId, (req, res, next) => {
   })
 })
 
-router.post('/', checkAccountPayload, (req, res, next) => {
+router.post('/', checkAccountPayload, checkAccountNameUnique, (req, res, next) => {
   // DO YOUR MAGIC
   const newAcc = req.body
   Account.create(newAcc)
