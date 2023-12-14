@@ -51,7 +51,7 @@ router.put('/:id', (req, res, next) => {
   })
 });
 
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:id', checkAccountId, async(req, res, next) => {
   // DO YOUR MAGIC
   const id = req.params.id
   const accountToBeDeleted = await Account.getById(id)
