@@ -19,6 +19,7 @@ router.get('/:id', checkAccountId, (req, res, next) => {
   const id = req.id
   Account.getById(id)
   .then(account => {
+    account.push(id)
     res.status(200).json(account)
   })
   .catch(error => {
