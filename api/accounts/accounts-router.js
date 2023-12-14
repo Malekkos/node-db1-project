@@ -26,6 +26,14 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   // DO YOUR MAGIC
+  const newAcc = req.body
+  Account.create(newAcc)
+  .then(account => {
+    res.status(201).json(account)
+  })
+  .catch(error => {
+    next(error)
+  })
 })
 
 router.put('/:id', (req, res, next) => {

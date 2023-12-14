@@ -14,6 +14,8 @@ const db = require("../../data/db-config")
 
  const create = async account => {
   // DO YOUR MAGIC
+  const result = await db("accounts").insert({"name": account.name, "budget": account.budget})
+  return result
 }
 
  const updateById = async (id, account) => {
