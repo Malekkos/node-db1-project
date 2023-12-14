@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const Account = require("./accounts-model")
 
-const { checkAccountId } = require("./accounts-middleware")
+const { checkAccountPayload, checkAccountNameUnique, checkAccountId } = require("./accounts-middleware")
 
 router.get('/', (req, res, next) => {
   // DO YOUR MAGIC
@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('/:id',checkAccountId, (req, res, next) => {
+router.get('/:id', checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
   const id = req.id
   Account.getById(id)
@@ -26,7 +26,7 @@ router.get('/:id',checkAccountId, (req, res, next) => {
   })
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAccountPayload, (req, res, next) => {
   // DO YOUR MAGIC
   const newAcc = req.body
   Account.create(newAcc)
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
   })
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', checkAccountPayload, (req, res, next) => {
   // DO YOUR MAGIC
   const id = req.id
   const updatedAcc = req.body
