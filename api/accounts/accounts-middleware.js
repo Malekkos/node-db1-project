@@ -33,7 +33,7 @@ exports.checkAccountId = async (req, res, next) => {
   const id = req.params.id
   const error = { status: 404 }
   const account = await Account.getById(id)
-  if (account.length === 0) {
+  if (!account) {
     error.message = "account not found"
     next(error)
   } else {
