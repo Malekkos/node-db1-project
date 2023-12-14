@@ -31,7 +31,12 @@ router.post('/', checkAccountPayload, (req, res, next) => {
   const newAcc = req.body
   Account.create(newAcc)
   .then(account => {
-    res.status(201).json(account)
+    Account.getById(account)
+    .then(createdAcc => {
+      const trimmedName = createdAcc.name.trim()
+      createdAcc.name = trimmedName
+      res.status(201).json(createdAcc)
+    })
   })
   .catch(error => {
     next(error)
