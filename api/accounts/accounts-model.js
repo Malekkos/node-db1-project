@@ -8,6 +8,8 @@ const db = require("../../data/db-config")
 
  const getById = async id => {
   // DO YOUR MAGIC
+  const result = await db("accounts").where({"id": id})
+  return result
 }
 
  const create = async account => {

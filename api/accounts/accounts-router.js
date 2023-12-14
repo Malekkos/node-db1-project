@@ -14,6 +14,14 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   // DO YOUR MAGIC
+  const id = req.params.id
+  Account.getById(id)
+  .then(account => {
+    res.status(200).json(account)
+  })
+  .catch(error => {
+    next(error)
+  })
 })
 
 router.post('/', (req, res, next) => {
