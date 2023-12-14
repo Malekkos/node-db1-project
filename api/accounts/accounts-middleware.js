@@ -40,12 +40,10 @@ exports.checkAccountId = (req, res, next) => {
   // console.log("I have ran")
   .then(account => {
     if(account.length == 0) {
-      console.log("I have ran")
       res.status(404).json({
         message: "account not found"
     })
     } else {
-      console.log("hehe xd")
       req.id = id
       next()
     }
