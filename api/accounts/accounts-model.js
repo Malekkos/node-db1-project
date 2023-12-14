@@ -20,6 +20,8 @@ const db = require("../../data/db-config")
 
  const updateById = async (id, account) => {
   // DO YOUR MAGIC
+  const result = await db("accounts").where("id", id).update({"name": account.name, "budget": account.budget})
+  return result
 }
 
  const deleteById = async id => {
