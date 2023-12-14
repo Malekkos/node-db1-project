@@ -4,24 +4,21 @@ exports.checkAccountPayload = (req, res, next) => {
   // DO YOUR MAGIC
   // Note: you can either write "manual" validation logic
   // or use the Yup library (not currently installed)
+  const error = {status: 400 }
   const name = req.body.name
-  const budget = req.body.name
+  const budget = req.body.budget
   if(!name || !budget) {
-    res.status(400).json({
-      message: "name and budget are required"
-    })
-  } else if(name.trim() < 3 || name.trim() > 100){
-    res.status(400).json({
-      message: "name of account must be between 3 and 100"
-    })
+    error.message = "name and budget are required"
+    next(error);
+  } else if(name.trim().length < 3 || name.trim().length > 100){
+      error.message = "name of account must be between 3 and 100"
+    next(error);
   } else if(Number.isInteger(budget) === false) {
-    res.status(400).json({
-      message: "budget of account must be a number"
-    })
+      error.message = "budget of account must be a number"
+    next(error);
   } else if(budget < 0 || budget > 1000000) {
-    res.status(400).json({
-      message: "budget of account is too large or too small"
-    })
+      error.message = "budget of account is too large or too small"
+    next(error);
   } else {
     next()
   }
@@ -41,6 +38,7 @@ exports.checkAccountId = (req, res, next) => {
       res.status(404).json({
         message: "account not found"
     })
+    next(error);
     } else {
       req.id = id
       next()
